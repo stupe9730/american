@@ -13,7 +13,7 @@ const app = express()
 app.use(express.json())
 // app.use(express.json())
 app.use(express.static(path.join(__dirname, "dist")))
-app.use(express.static())
+// app.use(express.static())
 app.use(cors({
     credentials: true,
     origin: "https://american-bpc8.onrender.com"
@@ -26,6 +26,9 @@ app.use("/api/v1/user", require("./route/userRoutes"))
 
 app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message || "Something Went Wrring" })
+})
+app.use("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"))
 })
 
 mongoose.connection.once("open", () => {
