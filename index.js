@@ -11,6 +11,9 @@ const app = express()
 
 
 app.use(express.json())
+// app.use(express.json())
+app.use(express.static(path.join(__dirname, "dist")))
+app.use(express.static())
 app.use(cors({
     credentials: true,
     origin: "https://american-bpc8.onrender.com"
